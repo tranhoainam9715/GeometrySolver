@@ -1,17 +1,13 @@
 package me.namtran.geometrysolver;
 
-import android.os.Build;
-import android.os.Handler;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -29,6 +25,13 @@ public class MainActivity extends AppCompatActivity {
         //transaction.addToBackStack(null);
         transaction.commit();
     }
+    void clearBackStack()
+    {
+        FragmentManager fm = getSupportFragmentManager();
+        for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+            fm.popBackStack();
+        }
+    }
     private BottomNavigationView _navigationView;
     private Fragment solver, detail, history;
     public static ArrayList<HistoryItem> historyList;
@@ -38,12 +41,15 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+                    clearBackStack();
                     callFragment(solver);
                     return true;
                 case R.id.navigation_dashboard:
+                    clearBackStack();
                     callFragment(detail);
                     return true;
                 case R.id.personal:
+                    clearBackStack();
                     callFragment(history);
                     return true;
             }
