@@ -33,10 +33,10 @@ public class CustomAdapter extends ArrayAdapter<HistoryItem> {
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.history_item, parent, false);
             viewHolder = new ViewHolder();
-            viewHolder.tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
-            viewHolder.tvKetQua = (TextView) convertView.findViewById(R.id.tvKetQua);
-            viewHolder.tvAvatar = (TextView) convertView.findViewById(R.id.tvAvatar);
-            viewHolder.tvTime = (TextView) convertView.findViewById(R.id.tvTime);
+            viewHolder.tvTitle = convertView.findViewById(R.id.tvTitle);
+            viewHolder.tvKetQua = convertView.findViewById(R.id.tvKetQua);
+            viewHolder.tvAvatar = convertView.findViewById(R.id.tvAvatar);
+            viewHolder.tvTime = convertView.findViewById(R.id.tvTime);
 
             convertView.setTag(viewHolder);
         } else {

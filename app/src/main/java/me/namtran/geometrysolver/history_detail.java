@@ -29,11 +29,11 @@ public class history_detail extends Fragment {
 //        Toast.makeText(this.getActivity(), value, Toast.LENGTH_SHORT).show();
         int pos=Integer.parseInt(value);
 
-        TextView title = (TextView)view.findViewById(R.id.textViewTitle);
-        TextView time = (TextView)view.findViewById(R.id.textViewTime);
-        TextView yeuCau = (TextView)view.findViewById(R.id.yeuCau);
-        TextView ketQua = (TextView)view.findViewById(R.id.ketQua);
-        TextView chiTiet = (TextView)view.findViewById(R.id.chiTiet);
+        TextView title = view.findViewById(R.id.textViewTitle);
+        TextView time = view.findViewById(R.id.textViewTime);
+        TextView yeuCau = view.findViewById(R.id.yeuCau);
+        TextView ketQua = view.findViewById(R.id.ketQua);
+        TextView chiTiet = view.findViewById(R.id.chiTiet);
         //
         String syeuCau=MainActivity.historyList.get(pos).getYeucau();
         String sketQua=MainActivity.historyList.get(pos).getKetqua();

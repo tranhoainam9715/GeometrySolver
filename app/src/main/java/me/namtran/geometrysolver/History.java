@@ -27,7 +27,7 @@ public class History extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_history, container, false);
-        ListView listLichSu= (ListView)view.findViewById(R.id.listLichSu);
+        ListView listLichSu= view.findViewById(R.id.listLichSu);
 
         CustomAdapter customAdapter=new CustomAdapter(this.getActivity(), R.layout.history_item, MainActivity.historyList);
         listLichSu.setAdapter(customAdapter);
