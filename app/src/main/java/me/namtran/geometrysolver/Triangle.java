@@ -24,6 +24,8 @@ public class Triangle extends Fragment {
     /*************************************/
     //////List parameter
     ArrayList<Float> listPara;
+    //Theo thứ tự
+    //{"a", "b", "c", "ha", "hb", "hc", "A", "B", "C", "S", "p", "r"};
     //Result
     float result=0;
     /*************************************/
@@ -37,7 +39,7 @@ public class Triangle extends Fragment {
     ArrayList<String> listParameterName;
     String[] lp={"a", "b", "c", "ha", "hb", "hc", "A", "B", "C", "S", "p", "r"};
     /////Position of selected item spiner parameters
-    int paraPosition=-1;
+    int paraPosition=0;
     /////////////////////////
     /////Position of selected item spiner result
     int resultPosition=-1;
@@ -102,15 +104,15 @@ public class Triangle extends Fragment {
         _btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(paraPosition>0) {
+                if(paraPosition>=0) {
                     String svalue = etValue.getText().toString();
                     float value = Float.parseFloat(svalue);
                     //Catch exception
                     listPara.set(paraPosition, value);
-                    listParameterName.remove(paraPosition);
                     String text = tvParameters.getText().toString();
                     if (text.equals("List of added parameters")) text = "";
-                    text += "\n" + listParameterName.get(paraPosition) + " = " + Float.toString(value);
+                    text += listParameterName.get(paraPosition) + " = " + Float.toString(value)+"\n";
+                    listParameterName.remove(paraPosition);
                     tvParameters.setText(text);
                     paraPosition=-1;
                 }
