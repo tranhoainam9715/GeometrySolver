@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">GeometrySolver</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dukien_yecau">Dữ kiện và Yêu cầu:</string>
+    <string name="ket_qua">Kết quả:</string>
+    <string name="chi_tiet">Lời giải chi tiết:</string>
+</resources>
