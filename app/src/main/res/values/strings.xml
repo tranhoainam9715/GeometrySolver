@@ -6,4 +6,9 @@
     <string name="dukien_yecau">Dữ kiện và Yêu cầu:</string>
     <string name="ket_qua">Kết quả:</string>
     <string name="chi_tiet">Lời giải chi tiết:</string>
+    <string name="result">Result:</string>
+    <string name="solve">Solve</string>
+    <string name="add">Add</string>
+    <string name="value_of_parameter">Value of parameter</string>
+    <string name="list_of_added_parameters">List of added parameters</string>
 </resources>

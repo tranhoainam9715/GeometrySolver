@@ -1,14 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Triangle">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Triangle" />
+    <ScrollView
+        android:background="@drawable/back"
+        android:id="@+id/svParameter"
+        android:layout_width="350dp"
+        android:layout_height="147dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="22dp">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/tvParameter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/list_of_added_parameters" />
+    </ScrollView>
+
+    <Spinner
+        android:id="@+id/spParameter"
+        android:layout_width="102dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="194dp" />
+
+    <EditText
+        android:id="@+id/etValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/svParameter"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="183dp"
+        android:ems="10"
+        android:inputType="phone"
+        android:hint="@string/value_of_parameter"/>
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/add" />
+
+    <Spinner
+        android:id="@+id/spResult"
+        android:layout_width="102dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/spParameter"
+        android:layout_marginBottom="182dp" />
+
+
+    <Button
+        android:id="@+id/btnSolve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="108dp"
+        android:text="@string/solve" />
+
+    <EditText
+        android:id="@+id/etResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/svParameter"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="168dp"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="@string/result"
+        android:enabled="false"
+        />
+
+
+</RelativeLayout>
