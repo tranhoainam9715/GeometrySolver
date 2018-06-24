@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -42,9 +43,17 @@ public class Triangle extends Fragment {
     int paraPosition=0;
     /////////////////////////
     /////Position of selected item spiner result
-    int resultPosition=-1;
+    int resultPosition=0;
     /////////////////////////
 
+    int find(String[] list, String value)
+    {
+        int n=list.length;
+        for(int i=0; i<n; i++)
+            if(list[i].equals(value))
+               return i;
+        return -1;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,7 +77,7 @@ public class Triangle extends Fragment {
         _btnSolve=(Button)view.findViewById(R.id.btnSolve);
         spParameter = view.findViewById(R.id.spParameter);
         spResult = view.findViewById(R.id.spResult);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, listParameterName);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, listParameterName);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spParameter.setAdapter(adapter);
         spParameter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -106,20 +115,59 @@ public class Triangle extends Fragment {
             public void onClick(View v) {
                 if(paraPosition>=0) {
                     String svalue = etValue.getText().toString();
-                    float value = Float.parseFloat(svalue);
-                    //Catch exception
-                    listPara.set(paraPosition, value);
-                    String text = tvParameters.getText().toString();
-                    if (text.equals("List of added parameters")) text = "";
-                    text += listParameterName.get(paraPosition) + " = " + Float.toString(value)+"\n";
-                    listParameterName.remove(paraPosition);
-                    tvParameters.setText(text);
-                    paraPosition=-1;
+                    if(!svalue.equals("")) {
+                        try {
+                            float value = Float.parseFloat(svalue);
+                            int pos=find(lp, listParameterName.get(paraPosition));
+                            if(pos>=0)
+                                listPara.set(pos, value);
+                            String text = tvParameters.getText().toString();
+                            if (text.equals("List of added parameters")) text = "";
+                            text += listParameterName.get(paraPosition) + " = " + Float.toString(value) + "\n";
+                            tvParameters.setText(text);
+                            //String t=listParaF(listPara);
+                            //tvParameters.setText(t);
+                            //paraPosition = 0;
+                            int temp=paraPosition;
+                            int nItem=listParameterName.size();
+                            if(paraPosition>=nItem-1)
+                                paraPosition-=1;
+                            listParameterName.remove(temp);
+                            etValue.setText("");
+                            adapter.notifyDataSetChanged();
+
+                        }
+                        catch(NumberFormatException e)
+                        {
+                            Toast.makeText(Triangle.this.getActivity(), "Invalid value!", Toast.LENGTH_SHORT).show();
+                        }
+
+
+                    }
+                    else Toast.makeText(Triangle.this.getActivity(), "Value cannot be empty!", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        //Button solve onclick
+        _btnSolve.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text=lp[resultPosition] + " = ";
+                etResult.setText(text);
             }
         });
         return view;
     }
 
+//    String listParaF(ArrayList<Float> list)
+//    {
+//        String result="";
+//        int n=list.size();
+//        for(int i=0; i<n; i++)
+//        {
+//            result= result+lp[i]+" = "+list.get(i).toString()+"\n";
+//        }
+//        return result;
+//    }
 
 }
