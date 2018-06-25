@@ -3,6 +3,7 @@ package me.namtran.geometrysolver;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -25,6 +28,7 @@ public class Triangle extends Fragment {
     /*************************************/
     //////List parameter
     ArrayList<Float> listPara;
+    Map<String, Float> UserValue = new HashMap<String, Float>();
     //Theo thứ tự
     //{"a", "b", "c", "ha", "hb", "hc", "A", "B", "C", "S", "p", "r"};
     //Result
@@ -80,16 +84,7 @@ public class Triangle extends Fragment {
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, listParameterName);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spParameter.setAdapter(adapter);
-        spParameter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                paraPosition=position;
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
         ///
 
 
@@ -108,51 +103,74 @@ public class Triangle extends Fragment {
             }
         });
 
+
+
         /////////////////////////
         //Button event
         _btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(paraPosition>=0) {
-                    String svalue = etValue.getText().toString();
-                    if(!svalue.equals("")) {
-                        try {
-                            float value = Float.parseFloat(svalue);
-                            int pos=find(lp, listParameterName.get(paraPosition));
-                            if(pos>=0)
-                                listPara.set(pos, value);
-                            String text = tvParameters.getText().toString();
-                            if (text.equals("List of added parameters")) text = "";
-                            text += listParameterName.get(paraPosition) + " = " + Float.toString(value) + "\n";
-                            tvParameters.setText(text);
-                            //String t=listParaF(listPara);
-                            //tvParameters.setText(t);
-                            //paraPosition = 0;
-                            int temp=paraPosition;
-                            int nItem=listParameterName.size();
-                            if(paraPosition>=nItem-1)
-                                paraPosition-=1;
-                            listParameterName.remove(temp);
-                            etValue.setText("");
-                            adapter.notifyDataSetChanged();
+                spParameter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        paraPosition=position;
+                    }
 
-                        }
-                        catch(NumberFormatException e)
-                        {
-                            Toast.makeText(Triangle.this.getActivity(), "Invalid value!", Toast.LENGTH_SHORT).show();
-                        }
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+                    }
+                });
+                String textParameter = spParameter.getSelectedItem().toString();
 
+                String svalue = etValue.getText().toString();
+                if(!svalue.equals("")) {
+                    try {
+                        float value = Float.parseFloat(svalue);
+
+                        UserValue.put(textParameter, value);
+
+                        int pos=find(lp, listParameterName.get(paraPosition));
+                        if(pos>=0)
+                            listPara.set(pos, value);
+                        String text = tvParameters.getText().toString();
+                        if (text.equals("List of added parameters")) text = "";
+                        text += textParameter + " = " + svalue + "\n";
+                        tvParameters.setText(text);
+                        //String t=listParaF(listPara);
+                        //tvParameters.setText(t);
+                        //paraPosition = 0;
+                        int temp=paraPosition;
+                        int nItem=listParameterName.size();
+                        if(paraPosition>=nItem-1)
+                            paraPosition-=1;
+                        listParameterName.remove(temp);
+                        etValue.setText("");
+                        adapter.notifyDataSetChanged();
 
                     }
-                    else Toast.makeText(Triangle.this.getActivity(), "Value cannot be empty!", Toast.LENGTH_SHORT).show();
+                    catch(NumberFormatException e)
+                    {
+                        Toast.makeText(Triangle.this.getActivity(), "Invalid value!", Toast.LENGTH_SHORT).show();
+                    }
+
+
                 }
+                else Toast.makeText(Triangle.this.getActivity(), "Value cannot be empty!", Toast.LENGTH_SHORT).show();
             }
         });
         //Button solve onclick
         _btnSolve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String text=lp[resultPosition] + " = ";
+
+                String textParameterResult = spResult.getSelectedItem().toString();
+
+
+                XuLy xl = new XuLy();
+                Log.d("debug", "xoxo");
+                xl.main(UserValue, textParameterResult);
+                String result = String.valueOf(xl.getResult());
+                String text=lp[resultPosition] + " = " + result;
                 etResult.setText(text);
             }
         });
