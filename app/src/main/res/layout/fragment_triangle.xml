@@ -6,14 +6,15 @@
     tools:context=".Triangle">
 
     <ScrollView
-        android:background="@drawable/back"
         android:id="@+id/svParameter"
+        android:backgroundTint="#baa1f5"
         android:layout_width="350dp"
-        android:layout_height="147dp"
+        android:layout_height="132dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="22dp">
+        android:layout_marginTop="22dp"
+        android:background="@drawable/back">
 
         <TextView
             android:id="@+id/tvParameter"
@@ -26,47 +27,49 @@
 
     <Spinner
         android:id="@+id/spParameter"
-        android:layout_width="102dp"
+        android:layout_width="111dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="194dp" />
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="180dp" />
 
     <EditText
         android:id="@+id/etValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/spParameter"
         android:layout_alignEnd="@+id/svParameter"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="183dp"
         android:ems="10"
-        android:inputType="phone"
-        android:hint="@string/value_of_parameter"/>
+        android:hint="@string/value_of_parameter"
+        android:inputType="phone" />
 
     <Button
         android:id="@+id/btnAdd"
-        android:layout_width="wrap_content"
+        android:background="@drawable/gradient"
+        android:layout_width="349dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_marginStart="-112dp"
+        android:layout_marginTop="210dp"
+        android:layout_toEndOf="@+id/spParameter"
         android:text="@string/add" />
 
     <Spinner
         android:id="@+id/spResult"
         android:layout_width="102dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/spParameter"
-        android:layout_marginBottom="182dp" />
+        android:layout_alignBottom="@+id/etResult"
+        android:layout_alignStart="@+id/spParameter" />
 
 
     <Button
         android:id="@+id/btnSolve"
-        android:layout_width="wrap_content"
+        android:background="@drawable/gradient"
+        android:layout_width="348dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="108dp"
+        android:layout_alignStart="@+id/etValue"
+        android:layout_marginStart="-134dp"
+        android:layout_marginTop="335dp"
         android:text="@string/solve" />
 
     <EditText
@@ -74,13 +77,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/svParameter"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="168dp"
+        android:layout_marginTop="284dp"
         android:ems="10"
-        android:inputType="text"
-        android:hint="@string/result"
         android:enabled="false"
-        />
+        android:hint="@string/result"
+        android:inputType="text" />
 
 
 </RelativeLayout>
