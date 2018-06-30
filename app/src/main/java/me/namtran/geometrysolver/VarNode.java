@@ -21,4 +21,8 @@ public class VarNode extends Node {
     public void Active() {
 
     }
+
+    public String getName() {
+        return Name;
+    }
 }

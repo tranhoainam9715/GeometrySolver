@@ -1,5 +1,7 @@
 package me.namtran.geometrysolver;
 
+import android.util.Log;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,7 +35,10 @@ public class FormulaNode extends Node {
         if (strTargetGetVarName == null) return;
         MyFunction f = Functions.get(strTargetGetVarName);
         float v = f.Eval();
+        Log.d("debug", "Active: " + Functions.keySet());
         Global.UpdateVarValue(strTargetGetVarName, v);
+        this.bActived = true;
+
     }
 
     private String FindTargetVarName() {
@@ -42,5 +47,9 @@ public class FormulaNode extends Node {
                 return VarName;
         }
         return null;
+    }
+
+    public String getName() {
+        return Name;
     }
 }

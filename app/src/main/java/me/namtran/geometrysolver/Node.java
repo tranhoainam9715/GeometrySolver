@@ -6,4 +6,6 @@ public abstract class Node {
     public abstract boolean CanActive();
 
     public abstract void Active();
+
+    public abstract String getName();
 }
