@@ -11,4 +11,12 @@
     <string name="add">Add</string>
     <string name="value_of_parameter">Value of parameter</string>
     <string name="list_of_added_parameters">List of added parameters</string>
+    <string name="your_title">Your title</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="empty_value">Title cannot be empty!</string>
+    <string name="timeline">Timeline</string>
+    <string name="empty_history_list">You haven\'t solved any problem</string>
+    <string name="default_tvParameters">List of added parameters</string>
+    <string name="default_etResult">Result:</string>
 </resources>

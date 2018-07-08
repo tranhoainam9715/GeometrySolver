@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 /**
@@ -20,16 +21,16 @@ import java.util.ArrayList;
  */
 public class Solver extends Fragment {
 
-    public void callFragment(Fragment fragment) {
+    public void callFragment(Fragment fragment, String tag) {
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         //Khi được goi, fragment truyền vào sẽ thay thế vào vị trí FrameLayout trong Activity chính
-        transaction.replace(R.id.subcontainer, fragment);
+        transaction.replace(R.id.subcontainer, fragment, tag);
         //  transaction.show(fragment);
         //transaction.addToBackStack(null);
         transaction.commit();
     }
-
+    Fragment fragment;
     public Solver() {
         // Required empty public constructor
     }
@@ -37,7 +38,7 @@ public class Solver extends Fragment {
     AdapterView.OnItemSelectedListener onItemSelectedListener=new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            Fragment fragment;
+            String tag="Triangle";
             switch (position)
             {
                 case 0:
@@ -45,13 +46,15 @@ public class Solver extends Fragment {
                     break;
                 case 1:
                     fragment = new Rectangle();
+                    tag="Rectangle";
                     break;
                 case 2:
                     fragment = new Circle();
+                    tag="Circle";
                     break;
                 default: fragment = new Triangle();
             }
-            callFragment(fragment);
+            callFragment(fragment, tag);
         }
 
         @Override
@@ -71,7 +74,7 @@ public class Solver extends Fragment {
 // Create an ArrayAdapter using the string array and a default spinner layout
 //        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),
 //                R.array.planets_array, android.R.layout.simple_spinner_item);
-        SpinnerAdapter adapter=new SpinnerAdapter(this.getActivity(),names, imgGeometry );// Specify the layout to use when the list of choices appears
+        SpinnerAdapter adapter=new SpinnerAdapter(Objects.requireNonNull(this.getActivity()),names, imgGeometry );// Specify the layout to use when the list of choices appears
        // adapter.setDropDownViewResource(R.layout.selector_item);
 // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
