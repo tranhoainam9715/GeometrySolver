@@ -18,8 +18,8 @@ public class VarNode extends Node {
     }
 
     @Override
-    public void Active() {
-
+    public BuocGiai Active() {
+        return null;
     }
 
     public String getName() {
