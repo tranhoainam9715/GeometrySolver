@@ -138,7 +138,7 @@
         fancy:layout_constraintHorizontal_bias="0.0"
         fancy:layout_constraintStart_toStartOf="parent"
         fancy:layout_constraintTop_toTopOf="parent"
-        fancy:layout_constraintVertical_bias="0.095">
+        fancy:layout_constraintVertical_bias="0.093">
 
         <TextView
             android:id="@+id/tvParameter"
@@ -174,7 +174,7 @@
         android:layout_height="50dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         fancy:fb_borderColor="#FFFFFF"
         fancy:fb_borderWidth="1dp"
         fancy:fb_defaultColor="#FF4081"
@@ -185,7 +185,8 @@
         fancy:fb_textColor="#FFFFFF"
         fancy:layout_constraintBottom_toTopOf="@+id/svParameter"
         fancy:layout_constraintEnd_toEndOf="parent"
-        fancy:layout_constraintTop_toTopOf="parent" />
+        fancy:layout_constraintTop_toTopOf="parent"
+        fancy:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>
 </ScrollView>

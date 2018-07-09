@@ -62,24 +62,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Remove title bar
-        //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-//Remove notification bar
-       // this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-//set content view AFTER ABOVE sequence (to avoid crash)
-        solver= new Solver();
+        solver = new Solver();
         detail = new Detail();
         history = new History();
-        callFragment(solver, "solver");
-        _navigationView=findViewById(R.id.navigationView);
+        _navigationView = findViewById(R.id.navigationView);
         _navigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
+        if(savedInstanceState==null) {
+            callFragment(solver, "solver");
 //        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 //        Date date = new Date();
 //        String sdate=dateFormat.format(date);
-        historyList =new ArrayList<>();
+            historyList = new ArrayList<>();
+        }
 //        historyList.add(new HistoryItem("Bài 1: Tính chiều cao h","","a=3\nb=5\nTinh chieu cao?","h_a = 5cm", "Buoc 1:\nBuoc 2:\nBuoc 3:", sdate));
 //        historyList.add(new HistoryItem("Bài 2: Tính diện tích S","","a=3\nb=5\nTinh dien tich?", "S = 10cm2", "Buoc 1:\nBuoc 2:\nBuoc 3:", sdate));
 //        historyList.add(new HistoryItem("Bài 3: Tính a","","a=3\nb=5\nTinh a?", "a = 5cm", "Buoc 1:\nBuoc 2:\nBuoc 3:", sdate));
