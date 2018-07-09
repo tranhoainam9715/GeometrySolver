@@ -8,13 +8,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,10 +42,10 @@ public class MainActivity extends AppCompatActivity {
                     clearBackStack();
                     callFragment(solver, "solver");
                     return true;
-                case R.id.navigation_dashboard:
-                    clearBackStack();
-                    callFragment(detail, "detail");
-                    return true;
+//                case R.id.navigation_dashboard:
+//                    clearBackStack();
+//                    callFragment(detail, "detail");
+//                    return true;
                 case R.id.personal:
                     clearBackStack();
                     callFragment(history, "history");
@@ -65,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         solver = new Solver();
-        detail = new Detail();
+        //detail = new Detail();
         history = new History();
         _navigationView = findViewById(R.id.navigationView);
         _navigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

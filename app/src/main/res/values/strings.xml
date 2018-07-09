@@ -19,4 +19,8 @@
     <string name="empty_history_list">You haven\'t solved any problem</string>
     <string name="default_tvParameters">List of added parameters</string>
     <string name="default_etResult">Result:</string>
+    <string name="date_time">Date time:</string>
+    <string name="title">Title</string>
+    <string name="ket_qua_2">ket qua</string>
+    <string name="chi_tiet_2">chi tiet</string>
 </resources>

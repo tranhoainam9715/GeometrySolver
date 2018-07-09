@@ -55,7 +55,7 @@ public class Triangle extends Fragment {
     EditText etValue, etResult;
     TextView tvParameters;
     Spinner spParameter, spResult;
-    FancyButton _btnAdd, _btnSolve, _btnSave, _btnNew;
+    FancyButton _btnAdd, _btnSolve, _btnSave, _btnNew, _btnDetail;
     ArrayList<String> listParameterName;
     String[] lp={"a", "b", "c", "ha", "hb", "hc", "A", "B", "C", "S", "p", "r"};
     /////Position of selected item spiner parameters
@@ -87,8 +87,24 @@ public class Triangle extends Fragment {
         _btnSolve = (FancyButton) view.findViewById(R.id.btnSolve);
         _btnSave = view.findViewById(R.id.btnSave);
         _btnNew=view.findViewById(R.id.btnNew);
+        _btnDetail= view.findViewById(R.id.btnDetail);
         spParameter = view.findViewById(R.id.spParameter);
         spResult = view.findViewById(R.id.spResult);
+        //spResult
+        ArrayAdapter<String> adapter_r = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, lp);
+        adapter_r.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spResult.setAdapter(adapter_r);
+        spResult.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                resultPosition = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         //Restore previous state
         if(MainActivity.budleTriangle!=null)
         {
@@ -97,6 +113,8 @@ public class Triangle extends Fragment {
             etResult.setText(MainActivity.budleTriangle.getString("etResult"));
             listParameterName=MainActivity.budleTriangle.getStringArrayList("listParameterName");
             UserValue=(Map<String, Float>) MainActivity.budleTriangle.getSerializable("UserValue");
+            resultPosition=MainActivity.budleTriangle.getInt("resultPosition");
+            spResult.setSelection(resultPosition);
         }
         else
         {
@@ -119,23 +137,6 @@ public class Triangle extends Fragment {
         spParameter.setAdapter(adapter);
 
         ///
-
-
-        ArrayAdapter<String> adapter_r = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, lp);
-        adapter_r.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spResult.setAdapter(adapter_r);
-        spResult.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                resultPosition = position;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
 
         /////////////////////////
         //FancyButton event
@@ -266,6 +267,29 @@ public class Triangle extends Fragment {
                 adapter.notifyDataSetChanged();
             }
         });
+
+        _btnDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fDetail fragment_detail = new fDetail();
+                Bundle args = new Bundle();
+                String s_require=lp[resultPosition];
+                String _title= "Tính "+ s_require+"?";
+                String _require=getRequire(s_require, UserValue);
+                String _result= etResult.getText().toString();
+                Date dDate=new Date();
+                args.putString("title", _title );
+                args.putString("time",dDate.toString() );
+                args.putString("require", _require);
+                args.putString("result", _result);
+                args.putString("detail","Chi tiet" );
+                fragment_detail.setArguments(args);
+                //Inflate the fragment
+                FragmentTransaction trans=getFragmentManager().beginTransaction();
+                trans.addToBackStack(null);
+                trans.replace(R.id.container,fragment_detail).commit();
+            }
+        });
         return view;
     }
 
@@ -289,6 +313,7 @@ public class Triangle extends Fragment {
         MainActivity.budleTriangle.putString("etResult", etResult.getText().toString());
         MainActivity.budleTriangle.putStringArrayList("listParameterName", listParameterName);
         MainActivity.budleTriangle.putSerializable("UserValue", (Serializable) UserValue);
+        MainActivity.budleTriangle.putInt("resultPosition", resultPosition);
     }
     //    String getResult(String re, float result)
 //    {

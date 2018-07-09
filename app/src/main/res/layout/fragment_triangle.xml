@@ -118,6 +118,7 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingTop="10dp"
+        android:textColor="#36ea1e"
         fancy:layout_constraintBottom_toBottomOf="@+id/spResult"
         fancy:layout_constraintEnd_toEndOf="@+id/etValue"
         fancy:layout_constraintStart_toStartOf="@+id/etValue" />
@@ -145,9 +146,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textColor="#31a0f5"
             android:text="@string/list_of_added_parameters"
             tools:layout_editor_absoluteX="114dp"
-            tools:layout_editor_absoluteY="69dp" />
+            tools:layout_editor_absoluteY="69dp"
+            android:textSize="16sp"/>
 
     </ScrollView>
 
@@ -155,6 +158,7 @@
         android:id="@+id/btnSave"
         android:layout_width="74dp"
         android:layout_height="45dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         fancy:fb_borderColor="#FFFFFF"
         fancy:fb_borderWidth="1dp"
@@ -165,7 +169,8 @@
         fancy:fb_text="SAVE"
         fancy:fb_textColor="#FFFFFF"
         fancy:layout_constraintEnd_toEndOf="@+id/btnSolve"
-        fancy:layout_constraintStart_toStartOf="@+id/btnSolve"
+        fancy:layout_constraintHorizontal_bias="0.2"
+        fancy:layout_constraintStart_toStartOf="parent"
         fancy:layout_constraintTop_toBottomOf="@+id/btnSolve" />
 
     <mehdi.sakout.fancybuttons.FancyButton
@@ -188,5 +193,24 @@
         fancy:layout_constraintTop_toTopOf="parent"
         fancy:layout_constraintVertical_bias="0.0" />
 
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/btnDetail"
+        android:layout_width="74dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        fancy:fb_borderColor="#FFFFFF"
+        fancy:fb_borderWidth="1dp"
+        fancy:fb_defaultColor="#3b5998"
+        fancy:fb_focusColor="#5474b8"
+        fancy:fb_iconPosition="left"
+        fancy:fb_radius="5dp"
+        fancy:fb_text="DETAIL"
+        fancy:fb_textColor="#FFFFFF"
+        fancy:layout_constraintEnd_toEndOf="parent"
+        fancy:layout_constraintHorizontal_bias="0.802"
+        fancy:layout_constraintStart_toStartOf="parent"
+        fancy:layout_constraintTop_toBottomOf="@+id/btnSolve" />
 </android.support.constraint.ConstraintLayout>
 </ScrollView>

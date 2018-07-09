@@ -25,7 +25,10 @@ public class history_detail extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_history_detail, container, false);
-        String value = getArguments().getString("position");
+        Bundle bundle=getArguments();
+        String value="0";
+        if(bundle!=null)
+            value=bundle.getString("position");
 //        Toast.makeText(this.getActivity(), value, Toast.LENGTH_SHORT).show();
         int pos=Integer.parseInt(value);
 
