@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.LoggingPermission;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -64,6 +65,7 @@ public class Triangle extends Fragment {
     /////Position of selected item spiner result
     int resultPosition=0;
     /////////////////////////
+    XuLy xl;
 
     int find(String[] list, String value)
     {
@@ -80,6 +82,8 @@ public class Triangle extends Fragment {
         View view = inflater.inflate(R.layout.fragment_triangle, container, false);
         //List of parameters
 
+        xl= new XuLy();
+        Log.d("debug", "xoxo");
         tvParameters = view.findViewById(R.id.tvParameter);
         etValue = view.findViewById(R.id.etValue);
         etResult = view.findViewById(R.id.etResult);
@@ -197,8 +201,7 @@ public class Triangle extends Fragment {
                 String textParameterResult = spResult.getSelectedItem().toString();
 
 
-                XuLy xl = new XuLy();
-                Log.d("debug", "xoxo");
+
                 xl.main(UserValue, textParameterResult);
                 mResult = xl.getResult();
                 String result = String.valueOf(mResult);
@@ -227,8 +230,17 @@ public class Triangle extends Fragment {
                             title[0] = _etTitle.getText().toString();
                             String require = getRequire(lp[resultPosition], UserValue);
                             String result = etResult.getText().toString();
+                            String loigiai="";
+                            try {
+                                String[] lLoiGiai = xl.cacBuocGiai();
+                                loigiai=getBuocGiai(lLoiGiai);
+                            }
+                            catch (Exception ex)
+                            {
+                                Log.e("Triangle", ex.getMessage());
+                            }
                             Date createDate = new Date();
-                            HistoryItem item = new HistoryItem(title[0], null, require, result, "Loi giai", createDate.toString());
+                            HistoryItem item = new HistoryItem(title[0], null, require, result, loigiai, createDate.toString());
                             MainActivity.historyList.add(item);
                             Toast.makeText(Triangle.this.getActivity(),
                                     "Item saved!",
@@ -277,12 +289,21 @@ public class Triangle extends Fragment {
                 String _title= "Tính "+ s_require+"?";
                 String _require=getRequire(s_require, UserValue);
                 String _result= etResult.getText().toString();
+                String _detail="";
+                try {
+                    String[] lLoiGiai = xl.cacBuocGiai();
+                    _detail=getBuocGiai(lLoiGiai);
+                }
+                catch (Exception ex)
+                {
+                    Log.e("Triangle", ex.getMessage());
+                }
                 Date dDate=new Date();
                 args.putString("title", _title );
                 args.putString("time",dDate.toString() );
                 args.putString("require", _require);
                 args.putString("result", _result);
-                args.putString("detail","Chi tiet" );
+                args.putString("detail",_detail );
                 fragment_detail.setArguments(args);
                 //Inflate the fragment
                 FragmentTransaction trans=getFragmentManager().beginTransaction();
@@ -304,6 +325,15 @@ public class Triangle extends Fragment {
         return result.toString();
     }
 
+    String getBuocGiai(String[] list)
+    {
+        StringBuilder builder=new StringBuilder("");
+        for(String s: list)
+        {
+            builder.append("\t").append(s).append("\n");
+        }
+        return builder.toString();
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();

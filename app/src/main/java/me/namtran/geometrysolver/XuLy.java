@@ -31,7 +31,8 @@ public class XuLy {
 
     }
 
-    public String[] cacBuocGiai(){
+    public String[] cacBuocGiai()
+    {
         Stack<BuocGiai> thuTuTinh = new Stack<BuocGiai>();
         Queue<BuocGiai> thuTuLui = new LinkedList<BuocGiai>();
         if (Global.HaveValue(ResultName)){

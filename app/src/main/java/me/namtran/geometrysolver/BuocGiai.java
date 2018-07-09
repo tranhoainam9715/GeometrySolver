@@ -12,8 +12,8 @@ public class BuocGiai {
     }
 
     public String toString(){
-        return "Su dung cong thuc: " + CongThuc+ "Tinh "+BienTinh +":\n"
-                +"Suy ra: " +BienTinh+" = "+GiaTri;
+        return "Sử dụng công thức: " + CongThuc+ "Tính "+BienTinh +":\n"
+                +"\t**Suy ra: " +BienTinh+" = "+GiaTri;
     }
 
     public String getBienTinh() {
