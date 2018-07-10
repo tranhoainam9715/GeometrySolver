@@ -31,15 +31,9 @@ public class XuLy {
         result = Global.GetValue(ResultName);
 
         String s = "";
-        List<String> dm = cacBuocGiai();
-        for (int i = 0; i < dm.size(); i++)
-            s += dm.get(i);
-
-        Log.d(TAG, "main: "+ s);
 
     }
 
-<<<<<<< HEAD
     private BuocGiai ktStrInBuocGiai(String str){
         for (BuocGiai bg: buocGiai
                 ) {
@@ -49,11 +43,7 @@ public class XuLy {
         return null;
 
     }
-    public List<String> cacBuocGiai(){
-=======
-    public String[] cacBuocGiai()
-    {
->>>>>>> 396ee7094a0b68696271d446b5e637fd50a3038e
+    public String[] cacBuocGiai(){
         Stack<BuocGiai> thuTuTinh = new Stack<BuocGiai>();
         Queue<BuocGiai> thuTuLui = new LinkedList<BuocGiai>();
         if (Global.HaveValue(ResultName)){
@@ -82,7 +72,8 @@ public class XuLy {
             List<String> result = new ArrayList<String>();
             while(!thuTuTinh.isEmpty()) result.add(thuTuTinh.pop().toString());
 
-            return result;
+            String[] array = result.toArray(new String[0]);
+            return array;
         }
         return null;
     }
