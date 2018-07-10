@@ -11,6 +11,7 @@ import java.util.Stack;
 
 public class XuLy {
     final String TAG = "debug";
+
     Node[] nodes = new Node[22];
     private List<BuocGiai> buocGiai = new ArrayList<BuocGiai>();
     public float result;
@@ -29,45 +30,53 @@ public class XuLy {
         this.ResultName = ResultName;
         result = Global.GetValue(ResultName);
 
+        String s = "";
+        List<String> dm = cacBuocGiai();
+        for (int i = 0; i < dm.size(); i++)
+            s += dm.get(i);
+
+        Log.d(TAG, "main: "+ s);
+
     }
 
-    public String[] cacBuocGiai(){
+    private BuocGiai ktStrInBuocGiai(String str){
+        for (BuocGiai bg: buocGiai
+                ) {
+            if (bg.getBienTinh().equals(str))
+                return bg;
+        }
+        return null;
+
+    }
+    public List<String> cacBuocGiai(){
         Stack<BuocGiai> thuTuTinh = new Stack<BuocGiai>();
         Queue<BuocGiai> thuTuLui = new LinkedList<BuocGiai>();
         if (Global.HaveValue(ResultName)){
-            for (BuocGiai bg: buocGiai
-                 ) {
-                if (bg.getBienTinh().equals(ResultName)){
-                    thuTuTinh.push(bg);
-                    thuTuLui.add(bg);
-                    break;
-                }
+            BuocGiai bg = ktStrInBuocGiai(ResultName);
+            if (bg != null){
+                thuTuTinh.push(bg);
+                thuTuLui.add(bg);
             }
-
             while(!thuTuLui.isEmpty()){
                 BuocGiai bien = thuTuLui.remove();
                 FormulaNode ct = (FormulaNode)bien.getCongThuc();
                 String[] cacBien = ct.getCacBien();
+
                 for (String s:cacBien
                      ) {
-                    if(!Global.isBienGiaiThiet(s)){
-                        for (BuocGiai bg: buocGiai
-                                ) {
-                            if (bg.getBienTinh().equals(s)){
-                                thuTuTinh.push(bg);
-                                thuTuLui.add(bg);
-                                break;
-                            }
+                    if(!Global.isBienGiaiThiet(s) && !s.equals(bien.getBienTinh())){
+                        BuocGiai bgNext = ktStrInBuocGiai(s);
+                        if (bg != null){
+                            thuTuTinh.push(bgNext);
+                            thuTuLui.add(bgNext);
                         }
                     }
                 }
 
             }
+            List<String> result = new ArrayList<String>();
+            while(!thuTuTinh.isEmpty()) result.add(thuTuTinh.pop().toString());
 
-            String[] result = new String[thuTuTinh.size()];
-            for ( int i = 0; i < result.length; i++){
-                result[i] = thuTuTinh.pop().toString();
-            }
             return result;
         }
         return null;
