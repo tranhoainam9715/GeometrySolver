@@ -39,6 +39,7 @@ public class XuLy {
 
     }
 
+<<<<<<< HEAD
     private BuocGiai ktStrInBuocGiai(String str){
         for (BuocGiai bg: buocGiai
                 ) {
@@ -49,6 +50,10 @@ public class XuLy {
 
     }
     public List<String> cacBuocGiai(){
+=======
+    public String[] cacBuocGiai()
+    {
+>>>>>>> 396ee7094a0b68696271d446b5e637fd50a3038e
         Stack<BuocGiai> thuTuTinh = new Stack<BuocGiai>();
         Queue<BuocGiai> thuTuLui = new LinkedList<BuocGiai>();
         if (Global.HaveValue(ResultName)){
