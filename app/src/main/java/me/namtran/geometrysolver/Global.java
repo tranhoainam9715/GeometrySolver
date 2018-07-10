@@ -10,12 +10,16 @@ public class Global {
     public static HashSet<String> BienGiaThiet = new HashSet<String>();
     static public Map<String, Float> Variables = new HashMap<String , Float>();
 
+    public static void setBienGiaThietNull(){
+        BienGiaThiet.clear();
+    }
+
     public static float GetValue(String VarName) {
         return Variables.get(VarName);
     }
 
     public static boolean HaveValue(String varName) {
-         return Variables.get(varName) != -1;
+         return Variables.get(varName) != -1.0;
     }
 
     public static void UpdateVarValue(String strTargetGetVarName, float v) {

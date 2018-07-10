@@ -20,8 +20,9 @@ public class XuLy {
 
         Log.d(TAG, "main: " + Value.size());
         AddVarNode();
-
         AddFormulaNode();
+
+        Global.setBienGiaThietNull();
 
         UpdateVarNode(Value);
 
@@ -31,7 +32,6 @@ public class XuLy {
         result = Global.GetValue(ResultName);
 
         String s = "";
-
     }
 
     private BuocGiai ktStrInBuocGiai(String str){
@@ -85,6 +85,7 @@ public class XuLy {
             Log.d(TAG, "UpdateVarNode: " + key + String.valueOf(value));
             Global.UpdateVarValue(key, value);
             Global.setBienGiaThiet(key);
+
         }
 
     }
@@ -101,7 +102,9 @@ public class XuLy {
             if (nodes[i].bActived == false){
                 if (nodes[i].CanActive()){
                     Log.d("debug", "Computing: " + nodes[i].getName());
-                    buocGiai.add(nodes[i].Active());
+                    BuocGiai a = nodes[i].Active();
+                    if (a != null)
+                        buocGiai.add(a);
                     process = true;
                 }
             }
@@ -117,7 +120,7 @@ public class XuLy {
 
         nodes[13] = new FormulaNode("S=sqrt(p*(p-a)*(p-b)*(p-c))", false, "S p a b c");
         ((FormulaNode)nodes[13]).AddMethod("S", new Func7_S());
-        ((FormulaNode)nodes[13]).AddMethod("p", new Func7_p());
+        ((FormulaNode)nodes[13]).AddMethod("p", null);
         ((FormulaNode)nodes[13]).AddMethod("a", new Func7_a());
         ((FormulaNode)nodes[13]).AddMethod("b", new Func7_b());
         ((FormulaNode)nodes[13]).AddMethod("c", new Func7_c());
@@ -134,7 +137,7 @@ public class XuLy {
         ((FormulaNode)nodes[15]).AddMethod("C", new Func15_C());
 
 
-        nodes[16] = new FormulaNode("S=1/2*a*ha", false,"S a");
+        nodes[16] = new FormulaNode("S=1/2*a*ha", false,"S a ha");
         ((FormulaNode)nodes[16]).AddMethod("S", new Func16_S());
         ((FormulaNode)nodes[16]).AddMethod("a", new Func16_a());
         ((FormulaNode)nodes[16]).AddMethod("ha", new Func16_ha());

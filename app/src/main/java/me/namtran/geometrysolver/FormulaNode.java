@@ -26,12 +26,16 @@ public class FormulaNode extends Node {
 
     @Override
     public boolean CanActive() {
-        int n = Functions.size();
+        int n = getCacBien().length;
         int c = 0;
         for ( String VarName : Functions.keySet()){
-            if (Global.HaveValue(VarName))
+            if (Global.HaveValue(VarName)){
+                Log.d("dm", "CanActive: " + this.getName() + " " +VarName + "=" + Global.GetValue(VarName));
                 c++;
+            }
+
         }
+
         return n - 1 == c;
     }
 
@@ -40,6 +44,7 @@ public class FormulaNode extends Node {
         String strTargetGetVarName = FindTargetVarName();
         if (strTargetGetVarName == null) return null;
         MyFunction f = Functions.get(strTargetGetVarName);
+        if (f == null) {this.bActived = false; return null;}
         float v = f.Eval();
 
         Log.d("debug", "Active: " + Functions.keySet());
