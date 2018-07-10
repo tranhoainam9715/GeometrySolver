@@ -67,6 +67,30 @@ public class Triangle extends Fragment {
     /////////////////////////
     XuLy xl;
 
+    public static String wrapString(String string, int charWrap) {
+        int lastBreak = 0;
+        int nextBreak = charWrap;
+        if (string.length() > charWrap) {
+            String setString = "";
+            do {
+                while (string.charAt(nextBreak-1) != ':' && nextBreak > lastBreak) {
+                    nextBreak--;
+                }
+                if (nextBreak == lastBreak) {
+                    nextBreak = lastBreak + charWrap;
+                }
+                setString += string.substring(lastBreak, nextBreak).trim() + "\n";
+                lastBreak = nextBreak;
+                nextBreak += charWrap;
+
+            } while (nextBreak < string.length());
+            setString += string.substring(lastBreak).trim();
+            return setString;
+        } else {
+            return string;
+        }
+    }
+
     int find(String[] list, String value)
     {
         int n=list.length;
@@ -239,6 +263,7 @@ public class Triangle extends Fragment {
                             {
                                 Log.e("Triangle", ex.getMessage());
                             }
+                            loigiai = wrapString(loigiai, 35);
                             Date createDate = new Date();
                             HistoryItem item = new HistoryItem(title[0], null, require, result, loigiai, createDate.toString());
                             MainActivity.historyList.add(item);
@@ -298,6 +323,7 @@ public class Triangle extends Fragment {
                 {
                     Log.e("Triangle", ex.getMessage());
                 }
+                _detail = wrapString(_detail, 35);
                 Date dDate=new Date();
                 args.putString("title", _title );
                 args.putString("time",dDate.toString() );
